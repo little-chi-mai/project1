@@ -1,7 +1,7 @@
 User.destroy_all
-u1 = User.create :email => 'mai@ga.co', :name => 'Mai', :nationality => 'Vietnamese', :dob => '1992-10-04', :about => 'This is Mai'
-u2 = User.create :email => 'dom@ga.co', :name => 'Dom', :nationality => 'Australian', :dob => '1991-01-01', :about => 'This is Dom'
-u3 = User.create :email => 'lan@ga.co', :name => 'Lan', :nationality => 'Vietnamese', :dob => '1958-02-03', :about => 'This is Lan'
+u1 = User.create :email => 'mai@ga.co', :name => 'Mai', :nationality => 'Vietnamese', :dob => '1992-10-04', :about => 'This is Mai', :password => 'chicken'
+u2 = User.create :email => 'dom@ga.co', :name => 'Dom', :nationality => 'Australian', :dob => '1991-01-01', :about => 'This is Dom', :password => 'chicken'
+u3 = User.create :email => 'lan@ga.co', :name => 'Lan', :nationality => 'Vietnamese', :dob => '1958-02-03', :about => 'This is Lan', :password => 'chicken'
 puts "#{User.count} users created."
 
 Comment.destroy_all
@@ -68,9 +68,9 @@ u2.recipes << r2
 u3.recipes << r3
 
 puts "Lists and users."
-u1.lists << l1
+u1.lists << l1 << l3
 u2.lists << l2
-u3.lists << l3
+# u3.lists << l3
 
 puts "Comments and recipes."
 r1.comments << c1
@@ -88,9 +88,9 @@ r2.likes << k2
 r3.likes << k1
 
 puts "Lists and recipes."
-r1.lists << l1 << l2
-r2.lists << l2 << l3
-r3.lists << l3 << l1
+l1.recipes << r1 << r2
+l2.recipes << r2 << r3
+l3.recipes << r1 << r3
 
 puts "Ingredients and recipes."
 r1.ingredients << i1 << i3

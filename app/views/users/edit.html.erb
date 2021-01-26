@@ -1,2 +1,24 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1>Edit User</h1>
+
+<%= form_for @user do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :nationality %>
+  <%= f.text_field :nationality %>
+
+  <%= f.label :dob %>
+  <%= f.date_field :dob, :placeholder => 'DD-MM-YYYY'%>
+
+  <%= f.label :about %>
+  <%= f.text_field :about %>
+
+  <%= f.label :image %>
+  <%= f.text_field :image %>
+
+  <%= f.submit "Update" %>
+
+<% end %>
