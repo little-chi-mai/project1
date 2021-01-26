@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :lists
 
+  resources :recipes
+
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'

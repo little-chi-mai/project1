@@ -26,7 +26,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find params[:id]
-    @recipe_names = @list.recipes.pluck :name
+    @recipes = @list.recipes
 
   end
 

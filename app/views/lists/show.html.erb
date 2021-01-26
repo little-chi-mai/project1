@@ -1,7 +1,7 @@
 <h1><%= @list.title %></h1>
 
-<% @recipe_names.each do |name| %>
+<% @recipes.each do |recipe| %>
   <p>
-    <%= link_to name,  %>
+    <%= link_to recipe.name, recipe %>
   </p>
 <% end %>
