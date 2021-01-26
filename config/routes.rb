@@ -6,6 +6,11 @@ Rails.application.routes.draw do
 
   resources :recipes
 
+  resources :comments
+  resources :likes
+  resources :ingredients
+  resources :countrys
+
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'

@@ -12,6 +12,8 @@
   <body>
     <nav>
       <%= link_to 'Home', root_path %>
+      <%= link_to 'All recipes', recipes_path %>
+
       <% if @current_user.present? %>
         <% if @current_user.admin? %>
           <%= link_to "All users", users_path %>

@@ -1,5 +1,7 @@
 <h1>All recipes</h1>
 
 <% @recipes.each do |recipe| %>
-  <%= link_to recipe.name, recipe %>
+  <p>
+    <%= link_to recipe.name, recipe %>
+  </p>
 <% end %>

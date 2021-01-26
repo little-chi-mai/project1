@@ -1,1 +1,30 @@
 <h1><%= @recipe.name %></h1>
+<h2>By <%= link_to @user.name, user_path(@user.id) %></h2>
+
+<p>
+  Prep time: <%= @recipe.prep_time %> <%= @recipe.prep_time_unit %>
+</p>
+
+<p>
+  Cooking time: <%= @recipe.cooking_time %> <%= @recipe.cooking_time_unit %>
+</p>
+
+<p>
+  Difficulty: <%= @recipe.difficulty %>/10
+</p>
+
+<p>
+  Course: <%= @recipe.course %>
+</p>
+
+<p>
+  Serving: <%= @recipe.serving %>
+</p>
+
+<p>
+  Country of Origin: <%= @recipe.country.name %>
+</p>
+
+<% if @recipe.image.present? %>
+  <%= image_tag @recipe.image %>
+<% end %>
