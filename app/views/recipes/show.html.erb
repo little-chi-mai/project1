@@ -28,7 +28,7 @@
 <% end %>
 
 <% if @recipe.image.present? %>
-  <%= image_tag @recipe.image %>
+  <%= cl_image_tag @recipe.image %>
 <% end %>
 
 <p>
@@ -65,4 +65,16 @@
   <p>
     <%= form.submit %>
   </p>
+<% end %>
+
+<h2>Similar dishes from the same cuisine</h2>
+<% @same_country_recipes.each do |recipe| %>
+<p class='thumbnail'><%= link_to cl_image_tag(recipe.image), recipe_path(recipe) %></p>
+<% end %>
+
+<% if @recipe.course.present? %>
+  <h2>Similar <%= @recipe.course %> dishes</h2>
+  <% @same_course_recipes.each do |recipe| %>
+  <p class='thumbnail'><%= link_to cl_image_tag(recipe.image), recipe_path(recipe) %></p>
+  <% end %>
 <% end %>

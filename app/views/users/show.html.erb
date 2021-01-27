@@ -4,7 +4,7 @@
 <p>Nationality: <%= @user.nationality %></p>
 <p>Date of Birth: <%= @user.dob %></p>
 <p>About: <%= @user.about %></p>
-<%= image_tag @user.image if @user.image.present? %>
+<%= cl_image_tag @user.image if @user.image.present? %>
 <ul>
   <% @user.lists.each do |list| %>
     <li><%= link_to list.title, list %></li>

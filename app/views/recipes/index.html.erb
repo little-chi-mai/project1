@@ -3,7 +3,7 @@
 <% @recipes.each do |recipe| %>
   <p>
     <% if recipe.image.present? %>
-      <%= link_to image_tag(recipe.image, :class => 'thumbnail'), recipe%>
+      <%= link_to cl_image_tag(recipe.image, :class => 'thumbnail'), recipe%>
     <% end %>
     <br>
     <%= link_to recipe.name, recipe %>

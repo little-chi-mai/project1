@@ -1,0 +1,8 @@
+<h3>Search Result</h3>
+
+    <% @results.each do |result| %>
+      <% if result.image.present? %>
+        <%= link_to cl_image_tag(result.image, :class => 'thumbnail'), recipe_path(result)%>
+      <% end %>
+        <%= link_to result.name, recipe_path(result) %><br>
+    <% end %>

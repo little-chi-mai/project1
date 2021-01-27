@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root :to => 'pages#home'
+  get '/search' => 'pages#search', :as => 'search_page'
   resources :users
 
   resources :lists
