@@ -4,24 +4,43 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new recipe_params
+    @recipe = Recipe.new
+  end
 
-    if @recipe.name.present?
-      @recipe.save
-      @current_user.recipes << @recipe
+  def create
+    recipe = Recipe.new recipe_params
+    country = Country.find params[:recipe][:country_id]
+
+    if recipe.name.present?
+      @current_user.recipes << recipe
+      country.recipes << recipe
+      recipe.save
       redirect_to recipe
     else
       flash[:error] = "Please enter the name of your recipe."
-      render new
+      render :new
     end
   end
 
   def edit
+    @recipe = Recipe.find params[:id]
   end
 
   def show
     @recipe = Recipe.find params[:id]
     @user = @recipe.user
+  end
+
+  def update
+    recipe = Recipe.find params[:id]
+    recipe.update recipe_params
+    redirect_to recipe
+  end
+
+  def destroy
+    recipe = Recipe.find params[:id]
+    recipe.destroy
+    redirect_to recipes_path
   end
 
   private

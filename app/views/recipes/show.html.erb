@@ -21,10 +21,49 @@
   Serving: <%= @recipe.serving %>
 </p>
 
+<% if @recipe.country.present? %>
 <p>
   Country of Origin: <%= @recipe.country.name %>
 </p>
+<% end %>
 
 <% if @recipe.image.present? %>
   <%= image_tag @recipe.image %>
+<% end %>
+
+<p>
+  Main recipe: <%= @recipe.content %>
+</p>
+
+<%= button_to "Edit", edit_recipe_path, :method => 'get' %>
+<%= button_to "Delete", @recipe, :method => 'delete', data: { confirm: "Are you sure?" } %>
+
+<h3>Comments</h3>
+<% @recipe.comments.each do |comment| %>
+  <% if comment.user.name.present? %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.user.name %>
+  </p>
+  <% else %>
+    <p>
+      <strong>Commenter:</strong>
+      <%= comment.user.email %>
+    </p>
+  <% end %>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.content %>
+  </p>
+<% end %>
+
+<h3>Add a comment: </h3>
+<%= form_with model: [@recipe, @recipe.comments.build] do |form| %>
+  <p>
+    <%= form.text_area :content %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
 <% end %>

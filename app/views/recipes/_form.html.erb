@@ -1,0 +1,28 @@
+<%= form_for @recipe do |f|%>
+  <%= f.label :name %>
+  <%= f.text_field :name, :required => true, :autofocus => true  %>
+
+  <%= f.label :country_of_origin %>
+  <%= f.select :country_id, Country.pluck(:name, :id), :include_blank => true %>
+
+  <%= f.label :prep_time %>
+  <%= f.number_field :prep_time %>
+
+  <%= f.select :prep_time_unit, ['minutes', 'hours'], :include_blank => true %>
+
+  <%= f.label :cooking_time %>
+  <%= f.number_field :cooking_time, step: :any %>
+  <%= f.select :cooking_time_unit, ['minutes', 'hours'], :include_blank => true %>
+
+  <%= f.label :serving %>
+  <%= f.number_field :serving %>
+
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <%= f.label :image_link %>
+  <%= f.url_field :image, :placeholder => 'http://...' %>
+
+  <%= f.submit %>
+
+<% end %>
