@@ -13,6 +13,7 @@
     <nav>
       <%= link_to 'Home', root_path %>
       <%= link_to 'All recipes', recipes_path %>
+      <%= link_to 'Add Brand', new_brand_path %>
 
       <% if @current_user.present? %>
         <% if @current_user.admin? %>

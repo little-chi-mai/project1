@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
   resources :recipes do
     resources :comments
+    resources :brands
   end
+
+  resources :brands
 
   resources :comments
   resources :likes

@@ -35,8 +35,11 @@
   Main recipe: <%= @recipe.content %>
 </p>
 
+
 <%= button_to "Edit", edit_recipe_path, :method => 'get' %>
 <%= button_to "Delete", @recipe, :method => 'delete', data: { confirm: "Are you sure?" } %>
+
+
 
 <h3>Comments</h3>
 <% @recipe.comments.each do |comment| %>

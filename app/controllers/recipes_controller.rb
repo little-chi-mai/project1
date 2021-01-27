@@ -1,10 +1,12 @@
 class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
+    @brand = Brand.new
   end
 
   def new
     @recipe = Recipe.new
+    @brand = Brand.new
   end
 
   def create
@@ -24,11 +26,13 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find params[:id]
+    @brand = Brand.new
   end
 
   def show
     @recipe = Recipe.find params[:id]
     @user = @recipe.user
+    @brand = Brand.new
   end
 
   def update
