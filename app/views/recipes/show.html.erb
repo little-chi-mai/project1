@@ -40,22 +40,18 @@
 
 <h3>Comments</h3>
 <% @recipe.comments.each do |comment| %>
-  <% if comment.user.name.present? %>
+
   <p>
     <strong>Commenter:</strong>
-    <%= comment.user.name %>
+    <%= comment.user.email%>
   </p>
-  <% else %>
-    <p>
-      <strong>Commenter:</strong>
-      <%= comment.user.email %>
-    </p>
-  <% end %>
 
   <p>
     <strong>Comment:</strong>
     <%= comment.content %>
   </p>
+
+  <%= button_to "Delete comment", comment, :method => 'delete' %>
 <% end %>
 
 <h3>Add a comment: </h3>

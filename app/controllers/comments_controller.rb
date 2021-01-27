@@ -4,11 +4,12 @@ class CommentsController < ApplicationController
 
   def create
     recipe = Recipe.find params[:recipe_id]
-    comment = recipe.comments.new
-    comment.user_id = @current_user.id
-    comment.save(comment_params)
+    comment = recipe.comments.new comment_params
+    @current_user.comments << comment
+    recipe.comments << comment
+    comment.save
 
-    redirect_to :new
+    redirect_back fallback_location: root_path
   end
 
   def new
@@ -18,6 +19,12 @@ class CommentsController < ApplicationController
   end
 
   def show
+  end
+
+  def destroy
+    comment = Comment.find params[:id]
+    comment.destroy
+    redirect_back fallback_location: root_path
   end
 
   private
