@@ -1,7 +1,15 @@
 <h1><%= @list.title %></h1>
 
+<% if flash[:error].present? %>
+  <p class="alert alert-warning" role="alert">
+    <%= flash[:error] %>
+  </p>
+<% end %>
+
 <div class="album py-5 bg-light">
   <div class="container">
+    <p><%= link_to "Add more to list", recipes_path %></p>
+    <p><%= link_to "Delete list", @list, :method => 'delete', data: { confirm: "Are you sure?" }%></p>
     <div class="row">
       <% @recipes.each do |recipe| %>
         <div class="col-md-4">

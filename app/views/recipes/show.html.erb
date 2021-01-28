@@ -18,14 +18,14 @@
               </p>
             </div>
             <div class="col-md-3">
-              <%= select_tag :list_id, options_for_select(@lists.pluck(:title, :id)), { :class => 'form-control' }  %>
+              <% if @current_user.present? && @current_user.lists.any? %>
+                <%= select_tag :list_id, options_for_select(@lists.pluck(:title, :id)), { :class => 'form-control' }  %>
+                <%= hidden_field_tag :recipe_id, @recipe.id %>
+                <%= submit_tag "Add to my list ❤️", { :class => ' btn btn-info btn-sm' }  %>
+              <% end %>
             </div>
-
-          <%= hidden_field_tag :recipe_id, @recipe.id %>
-          <%= submit_tag "Add to my list ❤️", { :class => ' btn btn-info btn-sm' }  %>
           </div>
         <% end %>
-
 
         <hr>
 

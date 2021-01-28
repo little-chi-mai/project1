@@ -35,7 +35,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find params[:id]
     @user = @recipe.user
     @rates = @recipe.rates
-    @lists = @current_user.lists
+    @lists = @current_user.lists if @current_user.present?
     @rate_average = nil
     if @rates.any?
       @rate_average = @rates.pluck(:rating).reduce(:+) / @rates.pluck(:rating).size.to_f

@@ -25,10 +25,14 @@ class ListsController < ApplicationController
   def add_recipe_to_list
     list = List.find params[:list_id]
     recipe = Recipe.find params[:recipe_id]
-
-    list.recipes << recipe
-    list.save
-    redirect_to list
+    if list.recipes.include?(recipe)
+      flash[:error] = "You already added this recipe!"
+      redirect_to list
+    else
+      list.recipes << recipe
+      list.save
+      redirect_to list
+    end
   end
 
   def edit
