@@ -1,4 +1,5 @@
 <h1><%= @recipe.name %></h1>
+<h3>Rating: <%= @rate_average %> </h3>
 <h2>By <%= link_to @user.name, user_path(@user.id) %></h2>
 
 <p>
@@ -35,15 +36,21 @@
   Main recipe: <%= @recipe.content %>
 </p>
 
+<% if @current_user == @recipe.user %>
+  <p>
+    <%= button_to "Edit", edit_recipe_path, :method => 'get' %>
+  </p>
+<% end %>
 
-<%= button_to "Edit", edit_recipe_path, :method => 'get' %>
-<%= button_to "Delete", @recipe, :method => 'delete', data: { confirm: "Are you sure?" } %>
-
+<% if @current_user == @recipe.user || @current_user.admin? %>
+  <p>
+    <%= button_to "Delete", @recipe, :method => 'delete', data: { confirm: "Are you sure?" } %>
+  </p>
+<% end %>
 
 
 <h3>Comments</h3>
 <% @recipe.comments.each do |comment| %>
-
   <p>
     <strong>Commenter:</strong>
     <%= comment.user.email%>
@@ -54,7 +61,9 @@
     <%= comment.content %>
   </p>
 
-  <%= button_to "Delete comment", comment, :method => 'delete' %>
+  <% if @current_user == comment.user || @current_user.admin? %>
+    <%= button_to "Delete comment", comment, :method => 'delete' %>
+  <% end %>
 <% end %>
 
 <h3>Add a comment: </h3>
@@ -67,13 +76,13 @@
   </p>
 <% end %>
 
-<h2>Similar dishes from the same cuisine</h2>
+<h2>Other dishes from the same cuisine</h2>
 <% @same_country_recipes.each do |recipe| %>
 <p class='thumbnail'><%= link_to cl_image_tag(recipe.image), recipe_path(recipe) %></p>
 <% end %>
 
 <% if @recipe.course.present? %>
-  <h2>Similar <%= @recipe.course %> dishes</h2>
+  <h2>Other <%= @recipe.course %> dishes</h2>
   <% @same_course_recipes.each do |recipe| %>
   <p class='thumbnail'><%= link_to cl_image_tag(recipe.image), recipe_path(recipe) %></p>
   <% end %>

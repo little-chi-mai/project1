@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find params[:id]
+    redirect_to root_path unless @current_user.present? && @current_user == @user
   end
 
   def update
@@ -43,6 +44,5 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name, :email, :nationality, :dob, :about, :image, :password, :password_confirmation)
-
   end
 end

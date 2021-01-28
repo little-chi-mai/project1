@@ -30,11 +30,17 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find params[:id]
+    redirect_to root_path unless @current_user.present? && @current_user == @recipe.user
   end
 
   def show
     @recipe = Recipe.find params[:id]
     @user = @recipe.user
+    @rates = @recipe.rates
+    @rate_average = nil
+    if @rates.any?
+      @rate_average = @rates.pluck(:rating).reduce(:+) / @rates.pluck(:rating).size.to_f
+    end
     @same_country_recipes = Recipe.all.where(country_id: @recipe.country_id).sample(3)
 
     if @recipe.course.present?
