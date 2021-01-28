@@ -46,11 +46,9 @@
             <p>
               <strong>Serving: </strong><%= @recipe.serving %>
             </p>
-            <% if @recipe.country.present? %>
             <p>
-              <strong>Country of Origin:</strong> <%= @recipe.country.name %>
+              <strong>Country of Origin:</strong> <%= @recipe.origin %>
             </p>
-            <% end %>
 
           </div>
 
