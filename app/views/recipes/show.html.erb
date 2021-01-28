@@ -42,12 +42,13 @@
   </p>
 <% end %>
 
-<% if @current_user == @recipe.user || @current_user.admin? %>
-  <p>
-    <%= button_to "Delete", @recipe, :method => 'delete', data: { confirm: "Are you sure?" } %>
-  </p>
+<% if @current_user.present? %>
+  <% if @current_user == @recipe.user || @current_user.admin? %>
+    <p>
+      <%= button_to "Delete", @recipe, :method => 'delete', data: { confirm: "Are you sure?" } %>
+    </p>
+  <% end %>
 <% end %>
-
 
 <h3>Comments</h3>
 <% @recipe.comments.each do |comment| %>
@@ -61,19 +62,23 @@
     <%= comment.content %>
   </p>
 
-  <% if @current_user == comment.user || @current_user.admin? %>
-    <%= button_to "Delete comment", comment, :method => 'delete' %>
+  <% if @current_user.present? %>
+    <% if @current_user == comment.user || @current_user.admin? %>
+      <%= button_to "Delete comment", comment, :method => 'delete' %>
+    <% end %>
   <% end %>
 <% end %>
 
-<h3>Add a comment: </h3>
-<%= form_with model: [@recipe, @recipe.comments.build] do |form| %>
-  <p>
-    <%= form.text_area :content %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
+<% if @current_user.present? %>
+  <h3>Add a comment: </h3>
+  <%= form_with model: [@recipe, @recipe.comments.build] do |form| %>
+    <p>
+      <%= form.text_area :content %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
 <% end %>
 
 <h2>Other dishes from the same cuisine</h2>
