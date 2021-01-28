@@ -6,7 +6,8 @@
   <div class="album py-5 bg-light">
     <div class="container">
       <h3><%= link_to list.title, list %> </h3>
-      <p><%= link_to "Add more", recipes_path %></p>
+      <p><%= link_to "Add more to list", recipes_path %></p>
+      <p><%= link_to "Delete list", list, :method => 'delete', data: { confirm: "Are you sure?" }%></p>
       <div class="row">
         <% recipes = list.recipes %>
         <% recipes.each do |recipe| %>

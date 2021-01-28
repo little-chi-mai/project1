@@ -10,11 +10,6 @@ c2 = Comment.create :content => 'I tried and loved this recipe.'
 c3 = Comment.create :content => "Oh it's too salty!"
 puts "#{Comment.count} comments."
 
-Country.destroy_all
-o1 = Country.create :name => 'Vietnam'
-o2 = Country.create :name => 'Japan'
-o3 = Country.create :name => 'Korean'
-puts "#{Country.count} countries."
 
 Ingredient.destroy_all
 i1 = Ingredient.create :name => 'Beef', :amount => '200', :unit => 'gram'
@@ -41,9 +36,9 @@ t3 = Rate.create :rating => '3'
 puts "#{Rate.count} rates."
 
 Recipe.destroy_all
-r1 = Recipe.create :name => 'Pho', :prep_time => '7', :prep_time_unit => 'hours', :cooking_time => '120', :cooking_time_unit => 'minutes', :difficulty => '7', :course => 'Main', :serving => '4', :content => 'Step 1: Buy Pho, Step 2: Eat Pho'
-r2 = Recipe.create :name => 'Sushi', :prep_time => '60', :prep_time_unit => 'minutes', :cooking_time => '30', :cooking_time_unit => 'minutes', :difficulty => '6', :course => 'Main', :serving => '4', :content => 'Step 1: Buy Sushi, Step 2: Eat Sushi'
-r3 = Recipe.create :name => 'Fried Chicken', :prep_time => '120', :prep_time_unit => 'minutes', :cooking_time => '30', :cooking_time_unit => 'minutes', :difficulty => '6', :course => 'Main', :serving => '4', :content => 'Step 1: Go to the restaurant, Step 2: Eat Fried chicken'
+r1 = Recipe.create :name => 'Pho', :prep_time => '7', :prep_time_unit => 'hours', :cooking_time => '120', :cooking_time_unit => 'minutes', :difficulty => '7', :course => 'Main', :serving => '4', :content => 'Step 1: Buy Pho, Step 2: Eat Pho', :origin => 'Vietnam'
+r2 = Recipe.create :name => 'Sushi', :prep_time => '60', :prep_time_unit => 'minutes', :cooking_time => '30', :cooking_time_unit => 'minutes', :difficulty => '6', :course => 'Main', :serving => '4', :content => 'Step 1: Buy Sushi, Step 2: Eat Sushi', :origin => 'Japan'
+r3 = Recipe.create :name => 'Fried Chicken', :prep_time => '120', :prep_time_unit => 'minutes', :cooking_time => '30', :cooking_time_unit => 'minutes', :difficulty => '6', :course => 'Main', :serving => '4', :content => 'Step 1: Go to the restaurant, Step 2: Eat Fried chicken', :origin => 'Korea'
 puts "#{Recipe.count} recipes."
 
 # Associations
@@ -96,8 +91,3 @@ puts "Ingredients and recipes."
 r1.ingredients << i1 << i3
 r2.ingredients << i2 << i3
 r3.ingredients << i1 << i3
-
-puts "Country and recipes."
-o1.recipes << r1
-o2.recipes << r2
-o3.recipes << r3

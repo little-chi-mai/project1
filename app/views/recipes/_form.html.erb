@@ -7,7 +7,7 @@
 
     <div class="form-group col-md-6">
       <%= f.label :country_of_origin %>
-      <%= f.select :country_id, Country.pluck(:name, :id), { :include_blank => true }, { :class => 'form-control' } %>
+      <%= f.text_field :origin, :class => 'form-control' %>
     </div>
 
     <div class="form-group col-md-6">
@@ -38,7 +38,7 @@
 
     <div class="form-group col-md-6">
       <%= f.label :course %>
-      <%= f.select :course, ['Entree', 'Main', 'Dessert'], { :include_blank => true }, { :class => 'form-control' } %>
+      <%= f.select :course, ['entree', 'main', 'dessert'], { :include_blank => true }, { :class => 'form-control' } %>
     </div>
 
   </div>
@@ -56,6 +56,6 @@
     <%= f.cl_image_upload :image, class: 'form-control' %>
   </div>
 
-  <%= f.submit "Create recipe!", :class => 'btn btn-success btn-lg' %>
+  <%= f.submit 'Submit', :class => 'btn btn-success btn-lg' %>
 
 <% end %>

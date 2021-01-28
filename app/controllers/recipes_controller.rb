@@ -40,7 +40,7 @@ class RecipesController < ApplicationController
     if @rates.any?
       @rate_average = @rates.pluck(:rating).reduce(:+) / @rates.pluck(:rating).size.to_f
     end
-    @same_country_recipes = Recipe.all.where(country_id: @recipe.country_id).sample(3)
+    @same_country_recipes = Recipe.all.where(origin: @recipe.origin).sample(3)
 
     if @recipe.course.present?
       @same_course_recipes = Recipe.all.where(course: @recipe.course).sample(3)
@@ -66,6 +66,6 @@ class RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:name, :prep_time, :prep_time_unit, :cooking_time, :cooking_time_unit, :difficulty, :course, :serving, :content, :image, :country_id)
+    params.require(:recipe).permit(:name, :prep_time, :prep_time_unit, :cooking_time, :cooking_time_unit, :difficulty, :course, :serving, :content, :image, :origin)
   end
 end
