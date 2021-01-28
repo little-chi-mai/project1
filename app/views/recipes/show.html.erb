@@ -1,89 +1,115 @@
 <h1><%= @recipe.name %></h1>
-<h3>Rating: <%= @rate_average %> </h3>
-<h2>By <%= link_to @user.name, user_path(@user.id) %></h2>
+<h4>Rating: <%= @rate_average %> </h4>
 
-<p>
-  Prep time: <%= @recipe.prep_time %> <%= @recipe.prep_time_unit %>
-</p>
-
-<p>
-  Cooking time: <%= @recipe.cooking_time %> <%= @recipe.cooking_time_unit %>
-</p>
-
-<p>
-  Difficulty: <%= @recipe.difficulty %>/10
-</p>
-
-<p>
-  Course: <%= @recipe.course %>
-</p>
-
-<p>
-  Serving: <%= @recipe.serving %>
-</p>
-
-<% if @recipe.country.present? %>
-<p>
-  Country of Origin: <%= @recipe.country.name %>
-</p>
+<% if @user.name.present? %>
+  <h3>By <%= link_to @user.name, user_path(@user.id) %></h3>
+<% else %>
+  <h3>By <%= link_to @user.email, user_path(@user.id) %></h3>
 <% end %>
 
-<% if @recipe.image.present? %>
-  <%= cl_image_tag @recipe.image %>
-<% end %>
+<div class="row">
+  <div class="col-6">
 
-<p>
-  Main recipe: <%= @recipe.content %>
-</p>
-
-<% if @current_user == @recipe.user %>
-  <p>
-    <%= button_to "Edit", edit_recipe_path, :method => 'get' %>
-  </p>
-<% end %>
-
-<% if @current_user.present? %>
-  <% if @current_user == @recipe.user || @current_user.admin? %>
     <p>
-      <%= button_to "Delete", @recipe, :method => 'delete', data: { confirm: "Are you sure?" } %>
+      Prep time: <%= @recipe.prep_time %> <%= @recipe.prep_time_unit %>
     </p>
+
+    <p>
+      Cooking time: <%= @recipe.cooking_time %> <%= @recipe.cooking_time_unit %>
+    </p>
+
+    <p>
+      Difficulty: <%= @recipe.difficulty %>/10
+    </p>
+
+    <p>
+      Course: <%= @recipe.course %>
+    </p>
+
+    <p>
+      Serving: <%= @recipe.serving %>
+    </p>
+
+    <% if @recipe.country.present? %>
+    <p>
+      Country of Origin: <%= @recipe.country.name %>
+    </p>
+    <% end %>
+
+  </div>
+
+  <div class="col-6">
+    <p>
+      Main recipe: <%= @recipe.content %>
+    </p>
+  </div>
+</div>
+
+<div class="text-center">
+  <% if @recipe.image.present? %>
+    <%= cl_image_tag @recipe.image %>
   <% end %>
-<% end %>
+</div>
 
-<h3>Comments</h3>
-<% @recipe.comments.each do |comment| %>
+<div class="control text-center">
   <p>
-    <strong>Commenter:</strong>
-    <%= comment.user.email%>
+      <% if @current_user == @recipe.user %>
+        <%= button_to "Edit", edit_recipe_path, :method => 'get', :class => 'btn btn-secondary' %>
+    <% end %>
+  </p>
+  <p>
+      <% if @current_user.present? %>
+        <% if @current_user == @recipe.user || @current_user.admin? %>
+          <%= button_to "Delete", @recipe, :method => 'delete', data: { confirm: "Are you sure?" }, :class => 'btn btn-danger' %>
+        <% end %>
+      <% end %>
   </p>
 
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.content %>
-  </p>
+</div>
 
-  <% if @current_user.present? %>
-    <% if @current_user == comment.user || @current_user.admin? %>
-      <%= button_to "Delete comment", comment, :method => 'delete' %>
+<div class="comment-box">
+  <h5>Comments</h5>
+  <% @recipe.comments.each do |comment| %>
+    <p>
+      <strong>From: </strong>
+      <% if comment.user.image? %>
+        <%= cl_image_tag comment.user.image, :class => "profile-pic" %>
+      <% end %>
+      <%= comment.user.email%>
+      <% if comment.user == @recipe.user %>
+        <span class="badge badge-secondary">Author</span>
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Comment:</strong>
+      <%= comment.content %>
+    </p>
+
+    <% if @current_user.present? %>
+      <% if @current_user == comment.user || @current_user.admin? %>
+        <%= button_to "Delete comment", comment, :method => 'delete', data: { confirm: "Are you sure?" } %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
 
-<% if @current_user.present? %>
-  <h3>Add a comment: </h3>
-  <%= form_with model: [@recipe, @recipe.comments.build] do |form| %>
-    <p>
-      <%= form.text_area :content %>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
+  <% if @current_user.present? %>
+    <h5>Add a comment: </h5>
+    <%= form_with model: [@recipe, @recipe.comments.build], local: true do |form| %>
+      <p>
+        <%= form.text_area :content %>
+      </p>
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+
 
 <h2>Other dishes from the same cuisine</h2>
 <% @same_country_recipes.each do |recipe| %>
-<p class='thumbnail'><%= link_to cl_image_tag(recipe.image), recipe_path(recipe) %></p>
+  <p class='thumbnail'><%= link_to cl_image_tag(recipe.image), recipe_path(recipe) %></p>
 <% end %>
 
 <% if @recipe.course.present? %>

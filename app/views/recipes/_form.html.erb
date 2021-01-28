@@ -1,31 +1,61 @@
 <%= form_for @recipe, :html => {:multipart => true} do |f|%>
-  <%= f.label :name %>
-  <%= f.text_field :name, :required => true, :autofocus => true  %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', :required => true, :autofocus => true %>
+    </div>
 
-  <%= f.label :country_of_origin %>
-  <%= f.select :country_id, Country.pluck(:name, :id), :include_blank => true %>
+    <div class="form-group col-md-6">
+      <%= f.label :country_of_origin %>
+      <%= f.select :country_id, Country.pluck(:name, :id), { :include_blank => true }, { :class => 'form-control' } %>
+    </div>
 
-  <%= f.label :prep_time %>
-  <%= f.number_field :prep_time %>
+    <div class="form-group col-md-6">
+      <%= f.label :prep_time %>
+      <%= f.number_field :prep_time, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :unit %>
+      <%= f.select :prep_time_unit, ['minutes', 'hours'], {}, { :class => 'form-control' }%>
+    </div>
+  </div>
 
-  <%= f.select :prep_time_unit, ['minutes', 'hours'], :include_blank => true %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :cooking_time %>
+      <%= f.number_field :cooking_time, class: 'form-control' %>
+    </div>
 
-  <%= f.label :cooking_time %>
-  <%= f.number_field :cooking_time, step: :any %>
-  <%= f.select :cooking_time_unit, ['minutes', 'hours'], :include_blank => true %>
+    <div class="form-group col-md-6">
+      <%= f.label :unit %>
+      <%= f.select :cooking_time_unit, ['minutes', 'hours'], {}, { :class => 'form-control' }%>
+    </div>
 
-  <%= f.label :serving %>
-  <%= f.number_field :serving %>
+    <div class="form-group col-md-6">
+      <%= f.label :serving %>
+      <%= f.number_field :serving, class: 'form-control' %>
+    </div>
 
-  <%= f.label :course %>
-  <%= f.select :course, ['entree', 'main', 'dessert'], :include_blank => true %>
+    <div class="form-group col-md-6">
+      <%= f.label :course %>
+      <%= f.select :course, ['entree', 'main', 'dessert'], { :include_blank => true }, { :class => 'form-control' } %>
+    </div>
 
-  <%= f.label :content %>
-  <%= f.text_field :content %>
+  </div>
 
-  <%= f.label "Upload from your computer" %>
-  <%= f.cl_image_upload :image %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :content %>
+      <%= f.text_field :content, class: 'form-control' %>
+    </div>
 
-  <%= f.submit %>
+  </div>
+
+  <div class="form-group col-md-6">
+    <%= f.label "Upload a photo from your computer" %>
+    <%= f.cl_image_upload :image, class: 'form-control' %>
+  </div>
+
+  <%= f.submit "Create recipe!", :class => 'btn btn-success btn-lg' %>
 
 <% end %>

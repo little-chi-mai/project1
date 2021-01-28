@@ -9,23 +9,15 @@ class RecipesController < ApplicationController
 
   def create
     recipe = Recipe.new recipe_params
-    country = Country.find params[:recipe][:country_id]
-
-    if recipe.name.present?
 
       @current_user.recipes << recipe
-      country.recipes << recipe
-
       if params[:file].present?
         req = Cloudinary::Uploader.upload(params[:file])
         recipe.image = req["public_id"]
       end
       recipe.save
       redirect_to recipe
-    else
-      flash[:error] = "Please enter the name of your recipe."
-      render :new
-    end
+
   end
 
   def edit
@@ -68,6 +60,6 @@ class RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:name, :prep_time, :prep_time_unit, :cooking_time, :cooking_time_unit, :difficulty, :course, :serving, :content, :image)
+    params.require(:recipe).permit(:name, :prep_time, :prep_time_unit, :cooking_time, :cooking_time_unit, :difficulty, :course, :serving, :content, :image, :country_id)
   end
 end

@@ -1,11 +1,11 @@
-<h1>New recipes</h1>
-
-<% @recipes.each do |recipe| %>
-  <p>
-    <% if recipe.image.present? %>
-      <%= link_to cl_image_tag(recipe.image, :class => 'thumbnail'), recipe%>
+<h1>All recipes</h1>
+<div class="container">
+  <div class="row">
+    <% @recipes.each do |recipe| %>
+      <div class="col-md-<%= rand(4..6) %> align-self-center">
+        <%= link_to cl_image_tag(recipe.image), recipe%>
+        <p><%= link_to recipe.name, recipe %></p>
+      </div>
     <% end %>
-    <br>
-    <%= link_to recipe.name, recipe %>
-  </p>
-<% end %>
+  </div>
+</div>
