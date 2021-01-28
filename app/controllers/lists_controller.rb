@@ -42,7 +42,7 @@ class ListsController < ApplicationController
 
   private
   def list_params
-    params.require(:list).permit(:title, :recipe_id)
+    params.require(:list).permit(:title, :recipe_id, :list_id)
   end
 
 end

@@ -1,4 +1,4 @@
-<h1>Your recipes</h1>
+<h1>My recipes</h1>
 
 <div class="album py-5 bg-light">
   <div class="container">
@@ -23,3 +23,5 @@
     </div>
   </div>
 </div>
+
+<%= button_to "Create recipe", new_recipe_path, :method => 'get', :class => 'btn btn-info btn-lg' %>

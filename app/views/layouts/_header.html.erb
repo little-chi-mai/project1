@@ -19,21 +19,21 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Your Recipes</strong>
+            My Recipes
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to "Create new recipe", new_recipe_path, :class => 'dropdown-item' %>
-            <%= link_to "View all your recipes", user_recipe_path, :class => 'dropdown-item' %>
+            <%= link_to "View all my recipes", user_recipe_path, :class => 'dropdown-item' %>
           </div>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Your lists</strong>
+            My lists
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to "Create new list", new_list_path, :class => 'dropdown-item' %>
-            <%= link_to "View all your lists", lists_path, :class => 'dropdown-item' %>
+            <%= link_to "View all my lists", lists_path, :class => 'dropdown-item' %>
           </div>
         </li>
 
@@ -51,8 +51,8 @@
           <% end %>
 
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <%= link_to "View your profile", user_path(@current_user.id), :class => 'dropdown-item' %>
-            <%= link_to "Edit your profile", edit_user_path(@current_user.id), :class => 'dropdown-item' %>
+            <%= link_to "View my profile", user_path(@current_user.id), :class => 'dropdown-item' %>
+            <%= link_to "Edit my profile", edit_user_path(@current_user.id), :class => 'dropdown-item' %>
             <%= link_to "Logout" , login_path, :method => 'delete', :class => 'dropdown-item' %>
           </div>
         </li>
@@ -72,11 +72,12 @@
   </div>
 
   <a class="navbar-brand"></a>
-  <form class="form-inline">
+  <%= form_tag(search_page_path, :method => "get", class: 'navbar-form navbar-left') do %>
     <div class="input-group">
       <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
       <div class="input-group-btn">
-        <%= button_tag "Search recipes", :class => 'btn btn-info glyphicon glyphicon-search', :name => 'nil' %>
-      </div>
-  </form>
+        <%= button_tag "🔍Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>
+    </div>
+  </div>
+<% end %>
 </nav>
