@@ -1,8 +1,9 @@
 class ListsController < ApplicationController
   before_action :check_for_login
 
-  def index
 
+  def index
+    @lists = List.all.where(user_id: @current_user.id)
   end
 
   def new
@@ -21,6 +22,15 @@ class ListsController < ApplicationController
     end
   end
 
+  def add_recipe_to_list
+    list = List.find params[:list_id]
+    recipe = Recipe.find params[:recipe_id]
+
+    list.recipes << recipe
+    list.save
+    redirect_to list
+  end
+
   def edit
   end
 
@@ -32,7 +42,7 @@ class ListsController < ApplicationController
 
   private
   def list_params
-    params.require(:list).permit(:title)
+    params.require(:list).permit(:title, :recipe_id)
   end
 
 end

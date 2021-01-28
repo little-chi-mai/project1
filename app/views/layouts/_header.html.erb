@@ -16,12 +16,28 @@
             <a class="nav-link" href="/users">All users</a>
           </li>
         <% end %>
-        <li class="nav-item">
-          <%= link_to "Create new recipe", new_recipe_path, :class => 'nav-link' %>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Your Recipes</strong>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to "Create new recipe", new_recipe_path, :class => 'dropdown-item' %>
+            <%= link_to "View all your recipes", user_recipe_path, :class => 'dropdown-item' %>
+          </div>
         </li>
-        <li class="nav-item">
-          <%= link_to "Create new list", new_list_path, :class => 'nav-link' %>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Your lists</strong>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to "Create new list", new_list_path, :class => 'dropdown-item' %>
+            <%= link_to "View all your lists", lists_path, :class => 'dropdown-item' %>
+          </div>
         </li>
+
+
 
         <li class="nav-item dropdown">
           <% if @current_user.name.present? %>

@@ -1,49 +1,74 @@
-<h1><%= @recipe.name %></h1>
-<h4>Rating: <%= @rate_average %> </h4>
 
-<% if @user.name.present? %>
-  <h3>By <%= link_to @user.name, user_path(@user.id) %></h3>
-<% else %>
-  <h3>By <%= link_to @user.email, user_path(@user.id) %></h3>
-<% end %>
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-12 blog-main">
 
-<div class="row">
-  <div class="col-6">
+      <div class="blog-post">
+        <h1 class="blog-post-title"><%= @recipe.name %></h1>
+        <h4>Ratings: <%= @rate_average %> </h4>
 
-    <p>
-      Prep time: <%= @recipe.prep_time %> <%= @recipe.prep_time_unit %>
-    </p>
 
-    <p>
-      Cooking time: <%= @recipe.cooking_time %> <%= @recipe.cooking_time_unit %>
-    </p>
 
-    <p>
-      Difficulty: <%= @recipe.difficulty %>/10
-    </p>
+        <%= form_tag(add_recipe_path, :method => 'post') do %>
+          <div class="form-row">
+            <div class="col-md-7">
+              <p class="blog-post-meta">Created at <%= @recipe.created_at.strftime("%d %b, %Y") %>  by
+                <% if @user.name.present? %>
+                  <%= link_to @user.name, user_path(@user.id) %>
+                <% else %>
+                  <%= link_to @user.email, user_path(@user.id) %>
+                <% end %>
+              </p>
+            </div>
+            <div class="col-md-3">
+              <%= select_tag :list_id, options_for_select(@lists.pluck(:title, :id)), { :class => 'form-control' }  %>
+            </div>
 
-    <p>
-      Course: <%= @recipe.course %>
-    </p>
+          <%= hidden_field_tag :recipe_id, @recipe.id %>
+          <%= submit_tag "Add to your list", { :class => ' btn btn-info btn-sm' }  %>
+          </div>
+        <% end %>
 
-    <p>
-      Serving: <%= @recipe.serving %>
-    </p>
 
-    <% if @recipe.country.present? %>
-    <p>
-      Country of Origin: <%= @recipe.country.name %>
-    </p>
-    <% end %>
+        <hr>
 
+        <div class="row">
+          <div class="col-md-6">
+            <p>
+              <strong>Prep time:</strong> <%= @recipe.prep_time %> <%= @recipe.prep_time_unit %>
+            </p>
+            <p>
+              <strong>Cooking time:</strong> <%= @recipe.cooking_time %> <%= @recipe.cooking_time_unit %>
+            </p>
+            <p>
+              <strong>Difficulty:</strong> <%= @recipe.difficulty %>/10
+            </p>
+            <p>
+              <strong>Course:</strong> <%= @recipe.course %>
+            </p>
+            <p>
+              <strong>Serving: </strong><%= @recipe.serving %>
+            </p>
+            <% if @recipe.country.present? %>
+            <p>
+              <strong>Country of Origin:</strong> <%= @recipe.country.name %>
+            </p>
+            <% end %>
+
+          </div>
+
+          <div class="col-md-6">
+          </div>
+        </div>
+        <hr>
+        <h4>
+          <strong>Main recipe</strong>
+        </h4>
+        <p><%= @recipe.content %></p>
+      </div>
+    </div>
   </div>
-
-  <div class="col-6">
-    <p>
-      Main recipe: <%= @recipe.content %>
-    </p>
-  </div>
-</div>
+</main>
 
 <div class="text-center">
   <% if @recipe.image.present? %>
@@ -106,15 +131,42 @@
   <% end %>
 </div>
 
-
-<h2>Other dishes from the same cuisine</h2>
-<% @same_country_recipes.each do |recipe| %>
-  <p class='thumbnail'><%= link_to cl_image_tag(recipe.image), recipe_path(recipe) %></p>
-<% end %>
+<h4>Other dishes from the same cuisine</h4>
+<div class="row">
+  <% @same_country_recipes.each do |recipe| %>
+    <div class="col-md-4">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Ratings</strong>
+          <h3 class="mb-0"><%= recipe.name %></h3>
+          <div class="mb-1 text-muted"><%= recipe.created_at.strftime("%d %b, %Y") %></div>
+          <%= link_to "View", recipe %>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <%= link_to cl_image_tag(recipe.image, :class => "card-img-top cl_image", :width => "100%", :height => "150px"), recipe%>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <% if @recipe.course.present? %>
-  <h2>Other <%= @recipe.course %> dishes</h2>
-  <% @same_course_recipes.each do |recipe| %>
-  <p class='thumbnail'><%= link_to cl_image_tag(recipe.image), recipe_path(recipe) %></p>
-  <% end %>
+  <h4>Other <%= @recipe.course %> dishes</h4>
+  <div class="row">
+    <% @same_course_recipes.each do |recipe| %>
+      <div class="col-md-4">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Ratings</strong>
+            <h3 class="mb-0"><%= recipe.name %></h3>
+            <div class="mb-1 text-muted"><%= recipe.created_at.strftime("%d %b, %Y") %></div>
+            <%= link_to "View", recipe %>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <%= link_to cl_image_tag(recipe.image, :class => "card-img-top cl_image", :width => "100%", :height => "150px"), recipe%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>

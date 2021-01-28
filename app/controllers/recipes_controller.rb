@@ -3,6 +3,11 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
+  def by_user
+    @recipes = Recipe.all.where(user_id: @current_user.id)
+
+  end
+
   def new
     @recipe = Recipe.new
   end
@@ -25,10 +30,12 @@ class RecipesController < ApplicationController
     redirect_to root_path unless @current_user.present? && @current_user == @recipe.user
   end
 
+
   def show
     @recipe = Recipe.find params[:id]
     @user = @recipe.user
     @rates = @recipe.rates
+    @lists = @current_user.lists
     @rate_average = nil
     if @rates.any?
       @rate_average = @rates.pluck(:rating).reduce(:+) / @rates.pluck(:rating).size.to_f
@@ -38,7 +45,6 @@ class RecipesController < ApplicationController
     if @recipe.course.present?
       @same_course_recipes = Recipe.all.where(course: @recipe.course).sample(3)
     end
-
   end
 
   def update
