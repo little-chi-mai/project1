@@ -9,8 +9,14 @@ h1, h2, h3, h4 {
 
 }
 
+.profile-pic-large {
+  max-width: 150px;
+  border-radius: 20%;
+}
+
 .profile-pic {
   width: 30px;
+  border-radius: 20%;
 }
 
 .comment-box {
