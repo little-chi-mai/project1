@@ -19,7 +19,7 @@
                 <p class="card-text"><%= recipe.name %></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <%= button_to "View recipe", recipe, :class => 'btn btn-sm btn-outline-secondary' %>
+                    <%= button_to "View recipe", recipe, :class => 'btn btn-sm btn-outline-secondary', :method => 'get' %>
                   </div>
                   <small class="text-muted">❤️</small>
                 </div>
