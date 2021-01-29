@@ -1,6 +1,6 @@
 # Project#1: FoodHub
 
-##By Mai Nguyen
+## By Mai Nguyen
 
 [FoodHub](https://foodhub-project1.herokuapp.com) is my first official project I created within a project week at General Assembly and was deployed by `heroku`.
 
