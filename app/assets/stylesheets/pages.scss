@@ -1,3 +1,45 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+img {
+  width: 50%
+}
+
+.thumbnail {
+  width: 20%
+}
+
+h1, h2, h3, h4 {
+  text-align: center;
+}
+
+.container {
+  max-width: 960px;
+}
+
+.inner-box {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+
+.profile-pic-large {
+  max-width: 150px;
+  border-radius: 20%;
+}
+
+.profile-pic {
+  width: 30px;
+  border-radius: 20%;
+}
+
+
+.comment-box {
+  background-color: #EEE;
+  margin: 0 auto;
+}
+
+.cl_image {
+  object-fit: cover;
+}

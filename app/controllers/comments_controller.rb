@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     recipe.comments << comment
     comment.save
 
-    redirect_back fallback_location: root_path
+    redirect_to recipe
   end
 
   def new

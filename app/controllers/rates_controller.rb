@@ -1,4 +1,5 @@
 class RatesController < ApplicationController
+  ### COMING SOON
   def index
   end
 

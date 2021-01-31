@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create user_params
-
+    #Check if user account was created
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_path

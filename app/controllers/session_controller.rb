@@ -3,7 +3,9 @@ class SessionController < ApplicationController
   end
 
   def create
+    # find a user in the database by email
     user = User.find_by :email => params[:email]
+    # check if the entered password is valid
     if user.present? && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to root_path

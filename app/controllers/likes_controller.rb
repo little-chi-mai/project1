@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  ### COMING SOON
   def index
   end
 

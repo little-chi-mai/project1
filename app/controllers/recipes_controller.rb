@@ -16,12 +16,19 @@ class RecipesController < ApplicationController
     recipe = Recipe.new recipe_params
 
       @current_user.recipes << recipe
-      if params[:file].present?
-        req = Cloudinary::Uploader.upload(params[:file])
-        recipe.image = req["public_id"]
+      if recipe.name.present?
+        if params[:file].present?
+          req = Cloudinary::Uploader.upload(params[:file])
+          recipe.image = req["public_id"]
+        end
+        recipe.save
+        redirect_to recipe
+      else
+        flash[:error] = "Please enter the recipe name"
+        render :new
       end
-      recipe.save
-      redirect_to recipe
+
+
 
   end
 

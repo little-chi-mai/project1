@@ -8,9 +8,8 @@
 
 <div class="text-center">
   <%= form_for @list do |f|%>
-
     <%= f.label :title%>
-    <%= f.text_field :title, :placeholder => 'Fav dessert', :autofocus => true, class: 'form-control' %>
+    <%= f.text_field :title, :placeholder => 'Fav dessert', :autofocus => true, class: 'form-control', 'required': true %>
     <br>
     <%= f.submit "Create list", :class => 'btn btn-success btn-lg form-control' %>
   <% end %>
