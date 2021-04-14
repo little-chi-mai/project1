@@ -11,8 +11,8 @@
     </div>
 
     <div class="form-group col-md-6">
-      <%= f.label :Difficulty %>
-      <%= f.number_field :difficulty, :class => 'form-control' %>
+      <%= f.label "Difficulty (out of 10)" %>
+      <%= f.number_field :difficulty, :class => 'form-control', max: 10 %>
     </div>
 
     <div class="form-group col-md-6">
