@@ -78,7 +78,8 @@ class RecipesController < ApplicationController
       end
     end
 
-    recipe.update recipe_params
+    recipe.update_attributes recipe_params
+    recipe.save
     redirect_to recipe
   end
 
