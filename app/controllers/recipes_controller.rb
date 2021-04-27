@@ -28,7 +28,6 @@ class RecipesController < ApplicationController
             recipe.images << req["public_id"]
           end
         end
-
         recipe.save
         redirect_to recipe
       else
