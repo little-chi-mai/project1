@@ -29,6 +29,14 @@
 
         <hr>
 
+        <div class="text-center">
+          <% if @recipe.image.present? %>
+            <%= cl_image_tag @recipe.image %>
+          <% end %>
+        </div>
+
+        <hr>
+
         <div class="row">
           <div class="col-md-6">
             <p>
@@ -55,7 +63,18 @@
           <div class="col-md-6">
           </div>
         </div>
+
         <hr>
+
+        <div class="row text-center">
+          <% @recipe.images.each do |image| %>
+            <div class="col-md-6">
+              <%= cl_image_tag image %>
+            </div>
+          <% end %>
+        </div>
+        <hr>
+
         <h4>
           <strong>Main recipe</strong>
         </h4>
@@ -65,11 +84,7 @@
   </div>
 </main>
 
-<div class="text-center">
-  <% if @recipe.image.present? %>
-    <%= cl_image_tag @recipe.image %>
-  <% end %>
-</div>
+
 
 <div class="control text-center">
   <p>

@@ -57,8 +57,13 @@
   </div>
 
   <div class="form-group col-md-6">
-    <%= f.label "Upload a photo from your computer" %>
+    <%= f.label "Upload a feature photo" %>
     <%= f.cl_image_upload :image, class: 'form-control' %>
+  </div>
+
+  <div class="form-group col-md-6">
+    <%= f.label "Upload more photos" %>
+    <%= f.file_field :images, :multiple => true %>
   </div>
 
   <%= f.submit 'Submit', :class => 'btn btn-success btn-lg' %>

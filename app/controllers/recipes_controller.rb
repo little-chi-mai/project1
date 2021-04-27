@@ -21,6 +21,14 @@ class RecipesController < ApplicationController
           req = Cloudinary::Uploader.upload(params[:file])
           recipe.image = req["public_id"]
         end
+
+        if params[:recipe][:images].present?
+          params[:recipe][:images].each do |image|
+            req = Cloudinary::Uploader.upload image
+            recipe.images << req["public_id"]
+          end
+        end
+
         recipe.save
         redirect_to recipe
       else
@@ -61,6 +69,15 @@ class RecipesController < ApplicationController
       req = Cloudinary::Uploader.upload(params[:file])
       recipe.image = req["public_id"]
     end
+
+    if params[:recipe][:images].present?
+      recipe.images = []
+      params[:recipe][:images].each do |image|
+        req = Cloudinary::Uploader.upload image
+        recipe.images << req["public_id"]
+      end
+    end
+
     recipe.update recipe_params
     redirect_to recipe
   end
